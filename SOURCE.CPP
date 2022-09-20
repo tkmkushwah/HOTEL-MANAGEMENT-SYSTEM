@@ -14,31 +14,26 @@
 using namespace std;
 //MARK:- Interface Functions Here =>
 
-// void intro() {
-// 	cout<<"\n\n\t\t\t\t\t          ";
-// 	cout << "\t\t\t\tC++ Project On Hotel Management System";
-// 	cout << "\n\n\t\t\t\t\t\t\t\t\t\t\t   MADE BY";
-// 	cout << "\n\n\t\t\t\t\t\t\t\t";
-// 	cout<<"||\t\t Tikam singh \t\t||";
-// }
+void intro() {
 
-// void head() {
-// 	cout<<"\t\t\t\t\t\t\t\t";
-// 	cout<<"\t\t\t   OYO Group of Hotels\t\t\t"  ;
-// 	cout<<"\t\t\t\t\t\t\t\t";
-// }
+	cout << "\n\t\t\t\t****************************************************";
+	cout << "\n\t\t\t\t*      C++ Project On Hotel Management System      *";
+	cout << "\n\t\t\t\t****************************************************";
+	cout << "\n\n\t\t\t\t\t\t*  MADE BY TIKAM SINGH  *";
+	cout << "\n\n\t\t\t\t\t\t\t\t";
+}
 
 void time() {
 	int i=0;
 	long long j;
-	cout<<"	\n\n\n	Connecting to Server\n 	Syncing DaTa";
+	cout<<"	\n\n\n	Please wait \n 	Loading";
 	while(i<10)	{
 		for (j=5;j>4;j++) {
-			if (j==99999) {
+			if (j==99999999) {
 				cout<<".";
 				break;
 			}
-		}
+		}	
 		++i;
 	}
 }
@@ -67,8 +62,6 @@ class hotel {
 void hotel::main_menu() {
 	int choice;
 	while(choice!=5) {
-		
-		// head();
 		cout<<"\n\t\t\t\t*************";
 		cout<<"\n\t\t\t\t* MAIN MENU *";
 		cout<<"\n\t\t\t\t*************";
@@ -91,7 +84,7 @@ void hotel::main_menu() {
 			case 5: break;
 			default: {
 				cout<<"\n\n\t\t\tWrong choice.....!!!";
-				cout<<"\n\t\t\tPress any key to continue....!!";
+				cout<<"\n\t\t\tEnter the UserName ....!!";
 				
 			}
 		}
@@ -100,7 +93,7 @@ void hotel::main_menu() {
 
 void hotel::add() {
 	
-	// head();
+	
 	int r,flag;
 	ofstream fout("Record.dat",ios::app);
 	cout<<"\n Enter Customer Details";
@@ -163,7 +156,7 @@ void hotel::display() {
 
 void hotel::rooms() {
 	
-	// head();
+	
 	ifstream fin("Record.dat",ios::in);
 	cout<<"\n\t\t\t    List Of Rooms Allotted";
 	cout<<"\n\t\t\t    ----------------------";
@@ -180,7 +173,7 @@ void hotel::rooms() {
 
 void hotel::edit() {
 	
-	// head();
+	
 	int choice,r;
 	cout<<"\n EDIT MENU";
 	cout<<"\n ---------";
@@ -188,7 +181,7 @@ void hotel::edit() {
 	cout<<"\n 2.Delete Customer Record";
 	cout<<"\n Enter your choice: ";
 	cin>>choice;
-	// head();
+	
 	cout<<"\n Enter room no: " ;
 	cin>>r;
 	switch(choice) {
@@ -219,8 +212,6 @@ int hotel::check(int r) {
 }
 
 void hotel::modify(int r) {
-	
-	// head();
 	long pos,flag=0;
 	fstream file("Record.dat",ios::in|ios::out|ios::binary);
 	while(!file.eof()) {
@@ -253,7 +244,7 @@ void hotel::modify(int r) {
 
 void hotel::delete_rec(int r) {
 	
-	// head();
+	
 	int flag=0;
 	char ch;
 	ifstream fin("Record.dat",ios::in);
@@ -290,15 +281,11 @@ void hotel::delete_rec(int r) {
 //MARK:- Main() Function Here =>
 
 int main() {
-	
-	
 	hotel h;
-	
 	cout<<"\n\n\n";
-	// intro();
+	intro();
 	time();
 	cout<<"\n\n\n\t\t\tPress any key to continue....!!";
-	// head();
 	char id[5],pass[7];
 	cout<<"\n\n\t\t\t\tusername => ";
 	cin>>id;
@@ -307,16 +294,13 @@ int main() {
 	cout<<"\n\n\t";
 	time();
 	cout<<"\t";
-	if(strcmp(id,"admin")==0&&strcmp(pass,"******")==0)
+	if(strcmp(id,"admin")==0&&strcmp(pass,"1234")==0)
 		cout<<"\n\n\t\t\t  !!!Login Successfull!!!";
 	else {
 		cout<<"\n\n\t\t\t!!!INVALID CREDENTIALS!!!";
-		
 		exit(-1);
 	}
 	
 	h.main_menu();
-	
-	
 	return 0;
 } 
