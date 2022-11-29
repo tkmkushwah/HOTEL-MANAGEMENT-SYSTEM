@@ -1,26 +1,22 @@
 /*
-
 	Title			: Hotel Management System
 	Language		: C++
 	Author			: Tikam singh
 	From            :1 AUGUST 2022
 	TO              :18 SEPTEMBER 2022
-
-
 */
 #include <bits/stdc++.h>
 using namespace std;
 
 void intro()
 {
-
 	cout << "\n\t\t\t\t****************************************************";
 	cout << "\n\t\t\t\t*      C++ Project On Hotel Management System      *";
 	cout << "\n\t\t\t\t****************************************************";
 	cout << "\n\n\t\t\t\t\t\t*  MADE BY TIKAM SINGH  *";
 	cout << "\n\n\t\t\t\t\t\t\t\t";
 }
-// ===================Time for loading =========================
+// ======================= Time for loading ===========================
 
 void time()
 {
@@ -41,7 +37,8 @@ void time()
 	}
 }
 
-// ========================Hotel Class=========================
+// ================================Hotel Class=========================
+
 class hotel
 {
 private:
@@ -103,19 +100,22 @@ void hotel::main_menu()
 		}
 	}
 }
-// =====================Book a room====================
+
+// =====================1.Book A Room====================
+
+
 void hotel::add()
 {
 	int r, flag;
-	ofstream fout("Record.dat", ios::app);
-	cout << "\n Enter Customer Details";
+	ofstream fout("Record.dat", ios::app);           //first open the textfile using ofstream class object in append mode
+	cout << "\n Enter Customer Details";  
 	cout << "\n ----------------------";
-	cout << "\n\n Room no: ";
+	cout << "\n\n Room no: ";               
 	cin >> r;
-	flag = check(r);
-	if (flag)
+	flag = check(r);                                //check availability of the room 
+	if (flag)                      
 		cout << "\n Sorry..!!!Room is already booked";
-	else
+	else                                            //if room is available take the customer details 
 	{
 		room_no = r;
 		cout << " Name: ";
@@ -124,31 +124,31 @@ void hotel::add()
 		gets(address);
 		cout << " Phone No: ";
 		gets(phone);
-		cout << " No of Days to Checkout: ";
+		cout << "No of Days to Checkout:";
 		cin >> days;
-		fare = days * 900; // 900 is currently set as the
-						   // default price per day
-		fout.write((char *)this, sizeof(hotel));
+		fare = days * 900;                          // 900 is currently set as the
+						                            // default price per day
+		fout.write((char *)this, sizeof(hotel));   //we will add all the details in file using fout
 		cout << "\n Room is booked...!!!";
 	}
-
 	cout << "\n Press any key to continue.....!!";
 	fout.close();
 }
 
-// ======================Display Records=====================
+
+// ======================2.Customer Record=====================
 void hotel::display()
 {
-	ifstream fin("Record.dat", ios::in);
-	int r, flag;
-	cout << "\n Enter room no: ";
+	ifstream fin("Record.dat", ios::in);        //we will open the file reading mode
+	int r, flag;     
+	cout << "\n Enter room no: ";               //room no. for which we want to check details
 	cin >> r;
-	while (!fin.eof())
+	while (!fin.eof())                          //read file till the end of the file 
 	{
-		fin.read((char *)this, sizeof(hotel));
-		if (room_no == r)
+		fin.read((char *)this, sizeof(hotel));  //reading 
+		if (room_no == r)                       //and will check if entered room no. is matching with stored room no. or not
 		{
-			cout << "\n Customer Details";
+			cout << "\n Customer Details";      // matching give all print all the details of the customer
 			cout << "\n ----------------";
 			cout << "\n\n Room no: " << room_no;
 			cout << "\n Name: " << name;
@@ -156,24 +156,24 @@ void hotel::display()
 			cout << "\n Phone no: " << phone;
 			cout << "\n Days: " << days;
 			cout << "\n Total Fare: " << fare;
-			flag = 1;
+			flag = 1;     
 		}
 	}
 	if (flag == 0)
-		cout << "\n Sorry Room no. not found or vacant....!!";
+	cout << "\n Sorry Room no. not found or vacant....!!";
 	cout << "\n\n Press any key to continue....!!";
-
 	fin.close();
 }
-// ====================allotted rooms=====================
+// ====================3.Rooms Allotted=====================
 void hotel::rooms()
 {
-	ifstream fin("Record.dat", ios::in);
+	ifstream fin("Record.dat", ios::in);                 //open the file in input mode
 	cout << "\n\t\t\t    List Of Rooms Allotted";
 	cout << "\n\t\t\t    ----------------------";
-	while (!fin.eof())
+	while (!fin.eof())                                  // read the file till the end of the file          
 	{
-		fin.read((char *)this, sizeof(hotel));
+		fin.read((char *)this, sizeof(hotel));          //reading 
+		                                                // and everytime we will give the details of the rooms
 		cout << "\n Room no: " << room_no << "\n Name: " << name;
 		cout << "\n Address: " << address << "\n Phone: " << phone;
 		cout << "\n Days: " << days << "\n Total: " << fare;
@@ -182,18 +182,20 @@ void hotel::rooms()
 	cout << "\n\n\n\t\t\tPress any key to continue.....!!";
 	fin.close();
 }
-// ====================Edit the Records===================
+
+// ====================4.Edit Record===================
 void hotel::edit()
 {
-	int choice, r;
+	 int choice, r;                                    //first we will take choice whether he want   
+	                                                    //to  modify or delete
 	cout << "\n EDIT MENU";
 	cout << "\n ---------";
 	cout << "\n\n 1.Modify Customer Record";
 	cout << "\n 2.Delete Customer Record";
 	cout << "\n Enter your choice: ";
 	cin >> choice;
-	cout << "\n Enter room no: ";
-	cin >> r;
+	cout << "\n Enter room no: ";                     // then take rooom no. he want to edit details for
+	cin >> r;        
 	switch (choice)
 	{
 	case 1:
@@ -209,14 +211,15 @@ void hotel::edit()
 }
 
 // ====================check availability of room======================
+
 int hotel::check(int r)
 {
 	int flag = 0;
-	ifstream fin("Record.dat", ios::in);
-	while (!fin.eof())
+	ifstream fin("Record.dat", ios::in);           //open file using ifstream class object 
+	while (!fin.eof())                             //till the end of the file
 	{
-		fin.read((char *)this, sizeof(hotel));
-		if (room_no == r)
+		fin.read((char *)this, sizeof(hotel));     // read from the file 
+		if (room_no == r)              
 		{
 			flag = 1;
 			break;
@@ -226,12 +229,12 @@ int hotel::check(int r)
 	fin.close();
 	return (flag);
 }
-// =========================Modify the Record=====================
+// =========================4.1 Modify the Record=====================
 void hotel::modify(int r)
 {
 	long pos, flag = 0;
-	fstream file("Record.dat", ios::in | ios::out | ios::binary);
-	while (!file.eof())
+	fstream file("Record.dat", ios::in | ios::out | ios::binary);   //open file in both modes input and output
+	while (!file.eof())                                              
 	{
 		pos = file.tellg();
 		file.read((char *)this, sizeof(hotel));
@@ -260,7 +263,7 @@ void hotel::modify(int r)
 	file.close();
 }
 
-// ===================delete record=========================
+// =====================4.2 delete record=========================
 void hotel::delete_rec(int r)
 {
 	int flag = 0;
@@ -287,7 +290,6 @@ void hotel::delete_rec(int r)
 		else
 			fout.write((char *)this, sizeof(hotel));
 	}
-
 	fin.close();
 	fout.close();
 	if (flag == 0)
@@ -300,7 +302,6 @@ void hotel::delete_rec(int r)
 }
 
 // MARK:- Main() Function Here =>
-
 int main()
 {
 	hotel h;
@@ -323,7 +324,6 @@ int main()
 		cout << "\n\n\t\t\t!!!INVALID CREDENTIALS!!!";
 		exit(-1);
 	}
-
 	h.main_menu();
 	return 0;
 }
